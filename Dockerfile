@@ -27,6 +27,6 @@ RUN apt-get install gcc libmariadb-dev-compat libmariadb-dev -y
 # run on the virual environment 
 #RUN python -m venv /opt/venv
 #ENV PATH="/opt/venv/bin:$PATH"
-#RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt
 
-#CMD ["python","manage.py","runserver", "0.0.0.0:8000"]
+CMD ["python","manage.py","runserver", "0.0.0.0:8000"]

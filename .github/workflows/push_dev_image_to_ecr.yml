@@ -44,7 +44,7 @@ jobs:
           ECR_REPOSITORY: portfolio
           IMAGE_TAG: dev
         run: |
-          docker build -t $ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           
       - name: Build, tag, and push image to Amazon ECR
@@ -54,7 +54,7 @@ jobs:
           ECR_REPOSITORY: portfolio
           IMAGE_TAG: dev
         run: |
-          docker build -t $ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile.cache .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile.cache .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       
   # deploy-service-update:
