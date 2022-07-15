@@ -22,8 +22,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.ECR_WRITE_AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.ECR_WRITE_AWS_SECRET_KEY }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
 
       - name: Login to Amazon ECR
@@ -40,7 +40,7 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         if: steps.verify-changed-files.outputs.files_changed == 'true'
         env:
-          ECR_REGISTRY: ${{ secrets.ECR_ACCOUNT_URL }}
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: portfolio
           IMAGE_TAG: dev
         run: |
@@ -50,7 +50,7 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         if: steps.verify-changed-files.outputs.files_changed != 'true'
         env:
-          ECR_REGISTRY: ${{ secrets.ECR_ACCOUNT_URL }}
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: portfolio
           IMAGE_TAG: dev
         run: |
