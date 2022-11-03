@@ -58,7 +58,7 @@ jobs:
           cache-to: type=gha,mode=max
           #cache-from: type=local,src=/tmp/.buildx-cache
           #cache-to: type=local,dest=/tmp/.buildx-cache-new
-        env: |
+        env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: portfolio
           IMAGE_TAG: ${{ env.RELEASE_VERSION }}
