@@ -55,6 +55,9 @@ jobs:
         with:
           context: .
           dockerfile: Dockerfile.cache
+          build-args: |
+            AWS_REGION=${{ secrets.AWS_DEFAULT_REGION }}
+            VERSION=development
           #builder: ${{ steps.buildx.outputs.name }}
           push: false
           tags: ${{ steps.login-ecr.outputs.registry }}/portfolio:${{ env.RELEASE_VERSION }}
