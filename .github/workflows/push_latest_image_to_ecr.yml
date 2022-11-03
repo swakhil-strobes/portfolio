@@ -53,7 +53,7 @@ jobs:
       - name: Build Docker image
         uses: docker/build-push-action@v3
         with:
-          context: . /Dockerfile.cache
+          context: . Dockerfile.cache
           #builder: ${{ steps.buildx.outputs.name }}
           push: false
           tags: ${{ steps.login-ecr.outputs.registry }}/portfolio:${{ env.RELEASE_VERSION }}
@@ -67,34 +67,34 @@ jobs:
       #     rm -rf /tmp/.buildx-cache
       #     mv /tmp/.buildx-cache-new /tmp/.buildx-cache
           
-  fake-step:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+  # fake-step:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
+  #       with:
+  #         fetch-depth: 0
           
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+  #     - name: Configure AWS credentials
+  #       uses: aws-actions/configure-aws-credentials@v1
+  #       with:
+  #         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #         aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
       
-      - name: set env
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+  #     - name: set env
+  #       run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+  #     - name: Login to Amazon ECR
+  #       id: login-ecr
+  #       uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build Docker image
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: false
-          tags: ${{ steps.login-ecr.outputs.registry }}/portfolio:${{ env.RELEASE_VERSION }}
+  #     - name: Build Docker image
+  #       uses: docker/build-push-action@v3
+  #       with:
+  #         context: .
+  #         push: false
+  #         tags: ${{ steps.login-ecr.outputs.registry }}/portfolio:${{ env.RELEASE_VERSION }}
 
       # - name: Verify Changed files
       #   uses: tj-actions/verify-changed-files@v10
