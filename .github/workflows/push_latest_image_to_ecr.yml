@@ -54,7 +54,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          dockerfile: Dockerfile.cache
+          file: Dockerfile.cache
           build-args: |
             AWS_REGION=${{ secrets.AWS_DEFAULT_REGION }}
             VERSION=development
