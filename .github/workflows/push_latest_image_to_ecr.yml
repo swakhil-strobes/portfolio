@@ -47,10 +47,13 @@ jobs:
       #     restore-keys: |
       #       ${{ runner.os }}-buildx-
       
+      - name: run command
+        run: ls
+
       - name: Build Docker image
         uses: docker/build-push-action@v3
         with:
-          context: portfolio/Dockerfile.cache
+          context: Dockerfile.cache
           #builder: ${{ steps.buildx.outputs.name }}
           push: false
           tags: ${{ steps.login-ecr.outputs.registry }}/portfolio:${{ env.RELEASE_VERSION }}
