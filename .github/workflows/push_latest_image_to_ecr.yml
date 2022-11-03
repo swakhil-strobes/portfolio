@@ -53,11 +53,15 @@ jobs:
           context: .
           #builder: ${{ steps.buildx.outputs.name }}
           push: false
-          tags: ${{ steps.login-ecr.outputs.registry }}/portfolio:${{ env.RELEASE_VERSION }}
+          tags: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           cache-from: type=gha
           cache-to: type=gha,mode=max
           #cache-from: type=local,src=/tmp/.buildx-cache
           #cache-to: type=local,dest=/tmp/.buildx-cache-new
+        env: |
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: portfolio
+          IMAGE_TAG: ${{ env.RELEASE_VERSION }}
       
       # - name: Move cache
       #   run: |
