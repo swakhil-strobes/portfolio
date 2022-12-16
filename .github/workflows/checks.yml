@@ -11,8 +11,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: Python Syntax Checker
         uses: cclauss/Find-Python-syntax-errors-action@v0.2.0
-      - name: Suggest Python Type Annotations
-        uses: typilus/typilus-action@master
+      - name: Python-lint-annotate: maintain code quality with annotated PRs and pushes
+        uses: marian-code/python-lint-annotate@v3
+      # - name: Suggest Python Type Annotations
+      #   uses: typilus/typilus-action@master
       # - uses: datadog/action-py-black-formatter@v2.1
       #   with:
       #     check_mode: "true"
