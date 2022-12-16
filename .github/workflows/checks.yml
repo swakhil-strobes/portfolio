@@ -12,7 +12,7 @@ jobs:
       - name: Python Syntax Checker
         uses: cclauss/Find-Python-syntax-errors-action@v0.2.0
       - name: Suggest Python Type Annotations
-        uses: typilus/typilus-action@v0.9
+        uses: typilus/typilus-action@master
       # - uses: datadog/action-py-black-formatter@v2.1
       #   with:
       #     check_mode: "true"
