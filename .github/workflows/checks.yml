@@ -13,9 +13,9 @@ jobs:
         uses: cclauss/Find-Python-syntax-errors-action@v0.2.0
       # - name: Suggest Python Type Annotations
       #   uses: typilus/typilus-action@master
-      - uses: datadog/action-py-black-formatter@v2.3
-        with:
-          check_mode: "true"
+      # - uses: datadog/action-py-black-formatter@v2.3
+      #   with:
+      #     check_mode: "true"
       - name: Annotate diff changes using reviewdog
         if: steps.action_black.outputs.is_formatted == 'true'
         uses: reviewdog/action-suggester@v1
