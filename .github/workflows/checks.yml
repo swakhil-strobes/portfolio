@@ -1,0 +1,30 @@
+name: run-python-checks-pr
+on:
+  push:
+    branches:
+      - main
+jobs:
+  linter_name:
+    name: runner / black
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Python Syntax Checker
+        uses: cclauss/Find-Python-syntax-errors-action@v0.2.0
+      - name: Suggest Python Type Annotations
+        uses: typilus/typilus-action@v0.9
+      # - uses: datadog/action-py-black-formatter@v2.1
+      #   with:
+      #     check_mode: "true"
+      # - name: Annotate diff changes using reviewdog
+      #   if: steps.action_black.outputs.is_formatted == 'true'
+      #   uses: reviewdog/action-suggester@v1
+      #   with:
+      #     tool_name: blackfmt
+      # - name: Run pycln
+      #   run: pip3 install pycln && pycln ${GITHUB_WORKSPACE}/ --all
+      # - name: Annotate diff changes using reviewdog
+      #   uses: reviewdog/action-suggester@v1
+      #   with:
+      #     tool_name: unused-imports
+      
