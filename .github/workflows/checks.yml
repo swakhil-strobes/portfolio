@@ -13,7 +13,7 @@ jobs:
         uses: cclauss/Find-Python-syntax-errors-action@v0.2.0
       # - name: Suggest Python Type Annotations
       #   uses: typilus/typilus-action@master
-      - uses: datadog/action-py-black-formatter@v2.1
+      - uses: datadog/action-py-black-formatter@v2.3
         with:
           check_mode: "true"
       - name: Annotate diff changes using reviewdog
