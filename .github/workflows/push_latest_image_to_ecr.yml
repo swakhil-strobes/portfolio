@@ -47,16 +47,16 @@ jobs:
       #     restore-keys: |
       #       ${{ runner.os }}-buildx-
       
-      - name: Get Changed files
-        uses: tj-actions/changed-files@v34
-        id: verify-changed-files
-        with:
-          files: |
-             requirements.txt
+      # - name: Get Changed files
+      #   uses: tj-actions/changed-files@v34
+      #   id: verify-changed-files
+      #   with:
+      #     files: |
+      #        requirements.txt
 
       - name: Build Docker image
         uses: docker/build-push-action@v3
-        if: steps.verify-changed-files.outputs.any_changed == 'true'
+        # if: steps.verify-changed-files.outputs.any_changed == 'true'
         with:
           context: .
           build-args: |
@@ -70,20 +70,20 @@ jobs:
           #cache-from: type=local,src=/tmp/.buildx-cache
           #cache-to: type=local,dest=/tmp/.buildx-cache-new
       
-      - name: Build Docker image
-        uses: docker/build-push-action@v3
-        if: steps.verify-changed-files.outputs.any_changed != 'true'
-        with:
-          context: .
-          file: Dockerfile.cache
-          build-args: |
-            AWS_REGION=${{ secrets.AWS_DEFAULT_REGION }}
-            VERSION=development
-          #builder: ${{ steps.buildx.outputs.name }}
-          push: false
-          tags: ${{ steps.login-ecr.outputs.registry }}/portfolio:${{ env.RELEASE_VERSION }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+      # - name: Build Docker image
+      #   uses: docker/build-push-action@v3
+      #   if: steps.verify-changed-files.outputs.any_changed != 'true'
+      #   with:
+      #     context: .
+      #     file: Dockerfile.cache
+      #     build-args: |
+      #       AWS_REGION=${{ secrets.AWS_DEFAULT_REGION }}
+      #       VERSION=development
+      #     #builder: ${{ steps.buildx.outputs.name }}
+      #     push: false
+      #     tags: ${{ steps.login-ecr.outputs.registry }}/portfolio:${{ env.RELEASE_VERSION }}
+      #     cache-from: type=gha
+      #     cache-to: type=gha,mode=max
       
       # - name: Move cache
       #   run: |
